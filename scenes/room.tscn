@@ -1,0 +1,60 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scripts/room.gd" type="Script" id=1]
+[ext_resource path="res://scenes/door.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/block.png" type="Texture" id=3]
+
+[node name="rooms" type="RigidBody2D"]
+z_index = -2
+collision_layer = 16
+collision_mask = 16
+mode = 2
+script = ExtResource( 1 )
+Door = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+
+[node name="top" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="top"]
+
+[node name="bottom" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bottom"]
+
+[node name="left" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="left"]
+
+[node name="right" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="right"]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+
+[node name="floor" type="Sprite" parent="."]
+self_modulate = Color( 0.462745, 0.462745, 0.462745, 1 )
+texture = ExtResource( 3 )
+
+[node name="back" type="Sprite" parent="."]
+self_modulate = Color( 0.160784, 0.160784, 0.160784, 1 )
+position = Vector2( 123.139, 0 )
+scale = Vector2( 35.3315, 16.1223 )
+z_index = -1
+texture = ExtResource( 3 )
+[connection signal="body_entered" from="top" to="." method="_on_top_body_entered"]
+[connection signal="body_entered" from="bottom" to="." method="_on_bottom_body_entered"]
+[connection signal="body_entered" from="left" to="." method="_on_left_body_entered"]
+[connection signal="body_entered" from="right" to="." method="_on_right_body_entered"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
